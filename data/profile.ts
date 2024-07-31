@@ -15,3 +15,11 @@ export const currentProfile = async () => {
 
   return data;
 }
+
+export const getProfiles = async () => {
+  const supabase = createClient();
+
+  const {data, error} = await supabase.from('profiel').select('*');
+
+  return data;
+}

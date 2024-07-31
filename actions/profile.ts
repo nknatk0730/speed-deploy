@@ -4,7 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { TablesInsert } from "@/types/db";
 
 export const createProfile = async (data: Omit<TablesInsert<'profiel'>, 'id'>) => {
-  const user = currentUser();
+  const user = await currentUser();
   const supabase = createClient();
 
   if (!user) {
@@ -13,7 +13,7 @@ export const createProfile = async (data: Omit<TablesInsert<'profiel'>, 'id'>) =
 
   const { data: profile, error } = await supabase
     .from("profiel")
-    .insert([{ ...data, id: user.id },]);
+    .insert([{ ...data, id: user.id }]);
 
   console.log(profile, error);
   

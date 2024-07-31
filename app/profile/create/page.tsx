@@ -1,3 +1,5 @@
+'use client'
+
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
+import { createProfile } from "@/actions/profile"
 
 export default function Page() {
   const formSchema = z.object({
@@ -26,7 +29,9 @@ export default function Page() {
     }
   })
 
-  const onSubmit = async () => {}
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    return createProfile(values);
+  }
 
   return (
     <div className="container py-6">
